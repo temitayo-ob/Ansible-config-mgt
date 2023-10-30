@@ -21,3 +21,10 @@
       apt:
         name: wireshark
         state: latest
+    
+    - name: create a  directory and file
+      ansible.builtin.file:
+        path: /ubuntu/testfolder
+        state: directory
+        mode: '0755'
+
