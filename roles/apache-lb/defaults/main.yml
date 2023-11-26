@@ -66,3 +66,6 @@ loadbalancer_name: "myapp"
 
 ip-172-31-27-47.eu-north-1.compute.internal: "172.31.27.47 weight=3"
 ip-172-31-27-133.eu-north-1.compute.internal: "172.31.27.133 weight=3"
+
+enable_nginx_lb: false
+load_balancer_is_required: false
