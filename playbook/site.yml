@@ -7,8 +7,8 @@
 #   tags:
 #     - always
 
-- hosts: nginx
-- name: nginx assignment
+- hosts: mysql
+- name: mysql assignment
   import_playbook: ../static-assignments/uat-webservers.yml
 
 # - name: Loadbalancers assignment
