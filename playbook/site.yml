@@ -7,8 +7,12 @@
 #   tags:
 #     - always
 
-- hosts: mysql
-- name: mysql assignment
+# - hosts: mysql
+# - name: mysql assignment
+#   import_playbook: ../static-assignments/uat-webservers.yml
+
+- hosts: artifactory
+- name: artifactory assignment
   import_playbook: ../static-assignments/uat-webservers.yml
 
 # - name: Loadbalancers assignment

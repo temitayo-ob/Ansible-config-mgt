@@ -3,6 +3,11 @@
   roles:
      - mysql
 
+- hosts: artifactory
+  roles:
+     - artifactory
+
+
        
 
 
