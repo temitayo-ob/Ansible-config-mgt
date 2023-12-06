@@ -1,28 +1,28 @@
 - name: Configure SELinux context
-  ansible.builtin.include_tasks: shared/selinux_configure_context.yml
+  include_tasks: shared/selinux_configure_context.yml
 
 - name: Allow using crontab
-  ansible.builtin.lineinfile:
+  lineinfile:
     path: /etc/cron.allow
     line: "{{ artifactory_user }}"
     state: present
   when: artifactory_allow_crontab
 
 - name: Allow reading cron.allow
-  ansible.builtin.file:
+  file:
     path: /etc/cron.allow
     mode: 0644
   when: artifactory_allow_crontab
 
 - name: Check if artifactory tar already exists
   become: true
-  ansible.builtin.stat:
+  stat:
     path: "{{ jfrog_home_directory }}/{{ artifactory_tar_file_name }}"
   register: artifactory_tar_check
 
 - name: Download artifactory for upgrade
   become: true
-  ansible.builtin.get_url:
+  get_url:
     url: "{{ artifactory_tar }}"
     timeout: "{{ artifactory_download_timeout }}"
     dest: "{{ jfrog_home_directory }}"
@@ -33,7 +33,7 @@
 
 - name: Extract artifactory tar
   become: true
-  ansible.builtin.unarchive:
+  unarchive:
     src: "{{ jfrog_home_directory }}/{{ artifactory_tar_file_name }}"
     dest: "{{ jfrog_home_directory }}"
     remote_src: true
@@ -47,31 +47,31 @@
   notify: Stop artifactory
 
 - name: Stop artifactory
-  ansible.builtin.meta: flush_handlers
+  meta: flush_handlers
 
 - name: Ensure jfrog_home_directory exists
   become: true
-  ansible.builtin.file:
+  file:
     mode: 0755
     path: "{{ jfrog_home_directory }}"
     state: directory
 
 - name: Delete artifactory app directory
   become: true
-  ansible.builtin.file:
+  file:
     path: "{{ artifactory_home }}/app"
     state: absent
   when: (download_artifactory.changed) or (unarchived_artifactory.changed)
 
 - name: Copy new app to artifactory app
   become: true
-  ansible.builtin.command: "cp -r {{ artifactory_untar_home }}/app/. {{ artifactory_home }}/app"
+  command: "cp -r {{ artifactory_untar_home }}/app/. {{ artifactory_home }}/app"
   when: (download_artifactory.changed) or (unarchived_artifactory.changed)
   notify: Restart artifactory
 
 - name: Configure artifactory license(s)
   become: true
-  ansible.builtin.template:
+  template:
     src: artifactory.cluster.license.j2
     dest: "{{ artifactory_home }}/var/etc/artifactory/artifactory.cluster.license"
     mode: 0644
@@ -82,19 +82,19 @@
 
 - name: Check if included database driver is the correct version
   become: true
-  ansible.builtin.stat:
+  stat:
     path: "{{ artifactory_home }}/app/artifactory/tomcat/lib/postgresql-{{ postgres_driver_version }}.jar"
   register: included_database_driver
 
 - name: Check if jdbc driver exists
   become: true
-  ansible.builtin.stat:
+  stat:
     path: "{{ artifactory_home }}/app/artifactory/tomcat/lib/jf_postgresql-{{ postgres_driver_version }}.jar"
   register: database_driver
 
 - name: Download jdbc driver
   become: true
-  ansible.builtin.get_url:
+  get_url:
     url: "{{ postgres_driver_download_url }}"
     dest: "{{ artifactory_home }}/var/bootstrap/artifactory/tomcat/lib"
     owner: "{{ artifactory_user }}"
@@ -108,7 +108,7 @@
 
 - name: Configure installer info
   become: true
-  ansible.builtin.template:
+  template:
     src: installer-info.json.j2
     dest: "{{ artifactory_home }}/var/etc/artifactory/info/installer-info.json"
     mode: 0644
@@ -116,7 +116,7 @@
 
 - name: Configure binary store
   become: true
-  ansible.builtin.template:
+  template:
     src: binarystore.xml.j2
     dest: "{{ artifactory_home }}/var/etc/artifactory/binarystore.xml"
     mode: 0644
@@ -127,13 +127,13 @@
 
 - name: Check if system.yaml exists
   become: true
-  ansible.builtin.stat:
+  stat:
     path: "{{ artifactory_home }}/var/etc/system.yaml"
   register: systemyaml
 
 - name: Configure system.yaml
   become: true
-  ansible.builtin.template:
+  template:
     src: "{{ artifactory_system_yaml_template }}"
     dest: "{{ artifactory_home }}/var/etc/system.yaml"
     mode: 0644
@@ -144,21 +144,21 @@
   notify: Restart artifactory
 
 - name: Install Service
-  ansible.builtin.include_tasks: shared/install_service.yml
+  include_tasks: shared/install_service.yml
 
 - name: Restore SELinux content
-  ansible.builtin.include_tasks: shared/selinux_restore_context.yml
+  include_tasks: shared/selinux_restore_context.yml
 
 - name: Ensure permissions are correct
-  ansible.builtin.include_tasks: shared/ensure_permissions_correct.yml
+  include_tasks: shared/ensure_permissions_correct.yml
 
 - name: Restart artifactory
-  ansible.builtin.meta: flush_handlers
+  meta: flush_handlers
   when:
     - artifactory_start_service | bool
 
 - name: Make sure artifactory is up and running
-  ansible.builtin.uri:
+  uri:
     url: http://127.0.0.1:8082/router/api/v1/system/health
     timeout: 130
     status_code: 200

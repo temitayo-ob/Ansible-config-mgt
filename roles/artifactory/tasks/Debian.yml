@@ -1,6 +1,6 @@
 - name: Install prerequisite packages
   become: true
-  ansible.builtin.apt:
+  apt:
     name: ["net-tools", "locales"]
     state: present
     update_cache: true
