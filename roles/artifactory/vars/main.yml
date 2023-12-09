@@ -1,5 +1,5 @@
-# platform collection version
-platform_collection_version: 10.16.2
+---
+# vars file for artifactory
 
-# indicates where this collection was downloaded from (galaxy, automation_hub, standalone)
-ansible_marketplace: galaxy
+artifactory_home: /opt/jfrog/artifactory/app/misc/etc
+artifactory_logs: /opt/jfrog/artifactory/var/log
