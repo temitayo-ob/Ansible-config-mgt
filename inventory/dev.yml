@@ -14,5 +14,5 @@
 # [db]
 # <DB-Server-Private-IP-Address>
 
-# [mysql]
-# 172.31.36.252 ansible_ssh_user=ubuntu 
+[mysql]
+172.31.36.252 ansible_ssh_user=ubuntu 

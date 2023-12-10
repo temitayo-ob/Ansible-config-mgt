@@ -1,11 +1,11 @@
 ---
-# - hosts: mysql
-#   roles:
-#      - mysql
-
-- hosts: artifactory
+- hosts: mysql
   roles:
-      - artifactory
+     - mysql
+
+# - hosts: artifactory
+#   roles:
+#       - artifactory
 
 
        
