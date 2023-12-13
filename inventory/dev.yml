@@ -1,8 +1,8 @@
 # [tooling]
 # <Tooling-Web-Server-Private-IP-Address>
 
-[todo]
-172.31.39.218 ansible_ssh_user=ec2-user
+# [todo]
+# 172.31.39.218 ansible_ssh_user=ec2-user
 
 # [nginx]
 # <Nginx-Private-IP-Address>
