@@ -18,7 +18,7 @@
     create: yes
 
 
-- name: Add ppa  repository 
+- name: Add ppa repository 
   ansible.builtin.apt_repository:
     repo: ppa:linuxuprising/java
 
