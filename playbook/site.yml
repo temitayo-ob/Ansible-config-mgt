@@ -21,12 +21,12 @@
 # - name: artifactory
 #   import_playbook: ../static-assignments/uat-webservers.yml
 
-- hosts: todo
-- name: app deployment
-  import_playbook: ../static-assignments/deployment.yml
+# - hosts: todo
+# - name: app deployment
+#   import_playbook: ../static-assignments/deployment.yml
 
-# - hosts: sonarqube
-# - name: sonarqube deployment
-#   import_playbook: ../static-assignments/sonarqube.yml
+- hosts: sonarqube
+- name: sonarqube deployment
+  import_playbook: ../static-assignments/sonarqube.yml
 
 
