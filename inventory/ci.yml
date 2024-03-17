@@ -6,6 +6,10 @@
 
 [sonarqube]
 172.31.51.122 ansible_ssh_user=ubuntu
+[sonarqube]
+172.31.95.235 ansible_ssh_user=ubuntu
 
+# [artifactory]
+# 172.31.54.143 ansible_ssh_user=ec2-user
 # [artifactory]
 # 172.31.54.143 ansible_ssh_user=ec2-user
