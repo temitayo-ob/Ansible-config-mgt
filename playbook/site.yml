@@ -14,9 +14,9 @@
 # - name: database mysql configuration
 #   import_playbook: ../static-assignments/uat-webservers.yml
 
-# - name: nginx
-#   import_playbook: ../static-assignments/loadbalancers.yml
-#   when: load_balancer_is_required 
+- name: nginx
+  import_playbook: ../static-assignments/loadbalancers.yml
+  when: load_balancer_is_required 
 
 # - name: artifactory
 #   import_playbook: ../static-assignments/uat-webservers.yml
@@ -25,8 +25,8 @@
 # - name: app deployment
 #   import_playbook: ../static-assignments/deployment.yml
 
-- hosts: sonarqube
-- name: sonarqube deployment
-  import_playbook: ../static-assignments/sonarqube.yml
+# - hosts: sonarqube
+# - name: sonarqube deployment
+#   import_playbook: ../static-assignments/sonarqube.yml
 
 
