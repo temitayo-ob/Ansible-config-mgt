@@ -3,9 +3,9 @@
 #   roles:
 #       - mysql
 
-# - hosts: artifactory
-#   roles:
-#       - artifactory
+- hosts: artifactory
+  roles:
+      - artifactory
 
 
        
