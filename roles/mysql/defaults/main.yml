@@ -127,7 +127,7 @@ mysql_databases:
 
 mysql_users:
   - name: homestead
-    host: 172.31.58.20
+    host: 172.31.59.245
     password: Password1
     priv: '*.*:ALL,GRANT'
 
