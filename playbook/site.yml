@@ -14,11 +14,11 @@
 # - name: database mysql configuration
 #   import_playbook: ../static-assignments/uat-webservers.yml
 
-- name: nginx
-  import_playbook: ../static-assignments/loadbalancers.yml
+# - name: nginx
+#   import_playbook: ../static-assignments/loadbalancers.yml
  
-# - name: artifactory
-#   import_playbook: ../static-assignments/uat-webservers.yml
+- name: artifactory
+  import_playbook: ../static-assignments/uat-webservers.yml
 
 # - hosts: todo
 # - name: app deployment
